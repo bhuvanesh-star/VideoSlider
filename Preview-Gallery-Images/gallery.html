@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Gallery</title>
+  <style>
+    .video-slider {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .main-video {
+      /* margin-bottom: 20px; */
+      margin: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .main-video video {
+      border-radius: 20px;
+    }
+
+    .preview-videos {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .preview-video {
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .preview-video video {
+      border-radius: 20px;
+    }
+
+    .preview-video h6 {
+      text-align: center;
+    }
+
+    .description {
+      font-style: italic;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+
+    .tileName {
+      margin-top: -10px;
+    }
+
+    @media (max-width:700px) {
+      .description {
+        font-size: 14px;
+        width: 60%;
+        text-align: center
+      }
+    }
+
+    @media (max-width:1000px) {
+      .preview-videos {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    @media(max-width:380px) {
+      .main-video video {
+        width: 190px;
+        height: 170px;
+      }
+    }
+
+    ;
+  </style>
+</head>
+
+<body>
+  <!-- Main Video Section -->
+  <div class="container-fluid">
+    <div class="video-slider" style="backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    background-color: rgba(225, 225, 225, 0.15);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);">
+      <div class="main-video">
+        <video src="" id="mainVideo" width="50%" height="20%" autoplay muted loop></video>
+        <div class="description" style="width:50%; text-align:justify"></div>
+      </div>
+
+      <!-- Preview Section -->
+      <div class="preview-videos">
+        <div class="preview-video active" data-src="EXPORT/Grouting,Color change.mp4" data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam laborum itaque soluta facilis suscipit tenetur ducimus.">
+          <video src="EXPORT/Grouting,Color change.mp4" width="170" height="150" autoplay muted loop>
+          </video>
+          <h6 class="tileName">Grouting</h6>
+        </div>
+        <div class="preview-video" data-src="EXPORT/Marblechange.mp4" data-description="Responsive galleries created with Bootstrap 5. Image gallery, video gallery, photo gallery, full-page, eCommerce, lightbox, slider, thumbnails, & more.">
+          <video src="EXPORT/Marblechange.mp4" width="170" height="150" autoplay muted loop="true"></video>
+          <h6 h6 class="tileName">Marblechange</h6>
+        </div>
+        <div class="preview-video" data-src="EXPORT/Normal,Invert,Mirror.mp4" data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam laborum itaque soluta facilis suscipit tenetur ducimus.">
+          <video src="EXPORT/Normal,Invert,Mirror.mp4" width="170" height="150" autoplay muted loop="true"></video>
+          <h6 h6 class="tileName">Invert </h6>
+        </div>
+        <div class="preview-video" data-src="EXPORT/PC.mp4" data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam laborum itaque soluta facilis suscipit tenetur ducimus.">
+          <video src="EXPORT/PC.mp4" width="170" height="150" autoplay muted loop="true"></video>
+          <h6 h6 class="tileName">PC</h6>
+        </div>
+        <div class="preview-video" data-src="EXPORT/Rotation,Roughness,Offset.mp4" data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam laborum itaque soluta facilis suscipit tenetur ducimus.">
+          <video src="EXPORT/Rotation,Roughness,Offset.mp4" width="170" height="150" autoplay muted loop="true"></video>
+          <h6 h6 class="tileName">Rotation</h6>
+        </div>
+        <div class="preview-video" data-src="EXPORT/VR.mp4" data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam laborum itaque soluta facilis suscipit tenetur ducimus.">
+          <video src="EXPORT/VR.mp4" width="170" height="150" autoplay muted loop="true"></video>
+          <h6 h6 class="tileName">VR</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Get the main video and description elements
+    const mainVideo = document.getElementById('mainVideo');
+    const description = document.querySelector('.description');
+
+    // Get all the preview videos
+    const previewVideos = document.querySelectorAll('.preview-video');
+
+    // Add click event listeners to the preview videos
+    previewVideos.forEach((previewVideo) => {
+      previewVideo.addEventListener('click', () => {
+        // Remove the active class from all preview videos
+        previewVideos.forEach((video) => {
+          video.classList.remove('active');
+        });
+
+        // Set the clicked preview video as active
+        previewVideo.classList.add('active');
+
+        // Get the video source and description from the clicked preview video
+        const videoSrc = previewVideo.getAttribute('data-src');
+        const videoDescription = previewVideo.getAttribute('data-description');
+
+        // Set the video source and description to the main video and description elements
+        mainVideo.src = videoSrc;
+        description.textContent = videoDescription;
+        // Play the main video
+        mainVideo.play();
+        if (window.innerWidth < 950) {
+          // Scroll to the video container using the scrollTo method
+          window.scrollTo(
+            0,
+            mainVideo.offsetTop,
+
+          );
+        }
+      });
+    });
+
+    // Set the first preview video as active by default
+    previewVideos[0].classList.add('active');
+    const firstVideoSrc = previewVideos[0].getAttribute('data-src');
+    const firstVideoDescription = previewVideos[0].getAttribute('data-description');
+    mainVideo.src = firstVideoSrc;
+    description.textContent = firstVideoDescription;
+  </script>
+</body>
+
+</html>

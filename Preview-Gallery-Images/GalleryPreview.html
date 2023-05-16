@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Preview bootstrap
+    </title>
+    <style>
+      .preview-image{
+        gap:0;
+        margin:0;
+        padding:0;
+
+      }
+        .main-image {
+      text-align: center;
+      display: none;
+    }
+
+    .main-image video {
+      top: 10%;
+      width: 90%;
+      height: 70vh;
+      border-radius: 15px
+    }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap-grid.min.css" integrity="sha512-JQksK36WdRekVrvdxNyV3B0Q1huqbTkIQNbz1dlcFVgNynEMRl0F8OSqOGdVppLUDIvsOejhr/W5L3G/b3J+8w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container ml-3 mr-3">
+        <div class="row">
+          <div class="col col-lg-2 col-md-3 col-sm-4">
+            <div class="preview-image">
+    
+              <h5 class="featureTitle">rotation</h5>
+              <video src="EXPORT/Grouting,Color change.mp4" width="200px" height="180px" margin="0 !importantx" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+            </div>
+            <div class="preview-image">
+    
+              <h5 class="featureTitle">cutting</h5>
+              <video src="EXPORT/Normal,Invert,Mirror.mp4" width="200px" height="180px" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+            </div>
+            <div class="preview-image">
+    
+              <h5 class="featureTitle">tiling</h5>
+              <video src="EXPORT/Marblechange.mp4" width="200px" height="180px" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+            </div>
+          </div>
+          <div class="col col-lg-8 col-md-6 col-sm-4">
+            <div class="main-image" id=mainImgCont>
+              <video src=""></video>
+              <div class="description"></div>
+            </div>
+          </div>
+          <div class="col col-lg-2 col-md-3 col-sm-4">
+            <div class="preview-image">
+    
+              <video src="EXPORT/Grouting,Color change.mp4" width="200px" height="180px" margin="0 !importantx" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+              <h5 class="featureTitle">rotation</h5>
+            </div>
+            <div class="preview-image">
+    
+              <video src="EXPORT/Normal,Invert,Mirror.mp4" width="200px" height="180px" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+              <h5 class="featureTitle">cutting</h5>
+            </div>
+            <div class="preview-image">
+    
+              <video src="EXPORT/Marblechange.mp4" width="200px" height="180px" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+              <h5 class="featureTitle">tiling</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script>
+        // Get the preview images and the main image
+        const previewImages = document.querySelectorAll('.preview-image');
+        const mainImage = document.querySelector('.main-image video');
+        const description = document.querySelector('.main-image .description');
+    
+        // Loop through the preview images and add a click event listener to each one
+        previewImages.forEach(previewImage => {
+          previewImage.addEventListener('click', () => {
+            // Set the src of the main image to the src of the clicked preview image
+    
+            mainImage.src = previewImage.querySelector('video').src;
+            mainImage.play();
+            // Set the description of the main image to the description of the clicked preview image
+            description.textContent = previewImage.querySelector('video').dataset.description;
+            // Show the main image and hide the preview images
+            document.querySelector('.main-image').style.display = 'block';
+            // document.querySelectorAll('.preview-image').forEach(previewImage => {
+            //   previewImage.style.display = 'none';
+            // });
+            if (window.innerWidth < 450) {
+              // Scroll to the video container using the scrollTo method
+              window.scrollTo(
+                0,
+                mainImage.offsetTop,
+    
+              );
+            }
+    
+    
+          });
+        });
+    
+        // Add a click event listener to the main image to hide it and show the preview images again
+        mainImage.addEventListener('click', () => {
+          document.querySelector('.main-image').style.display = 'none';
+          document.querySelectorAll('.preview-image').forEach(previewImage => {
+            previewImage.style.display = 'block';
+          });
+        });
+    
+        //how can i make the page scroll upto the main video section when i click on the preview image?
+      </script>
+    
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>image gallery with description </title>
+  <style>
+    .gallery {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-wrap: wrap;
+
+    }
+
+    .preview {
+      flex-basis: 100px;
+      text-align: center;
+    }
+
+    .preview-images {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+
+    }
+
+    .preview-image {
+
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+      margin: 0
+    }
+
+    .preview-image video {
+      display: flex;
+      margin: 0 0 !important;
+      padding: 0 0 !important;
+    }
+
+    .main-image {
+      text-align: center;
+      display: none;
+    }
+
+    .main-image video {
+
+      width: 85%;
+      height: 60vh;
+      border-radius: 35%;
+      margin-top: -20%;
+    }
+
+    .main-image .description {
+      font-size: 14px;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    .preview-image>.featureTitle {
+      margin: 0 !important;
+      padding: 0 !important;
+      display: none;
+    }
+
+    .preview-image:hover .featureTitle {
+      transition: ease-in-out 0.1s;
+      display: block;
+      text-align: center;
+    }
+
+
+
+    @media screen and (max-width: 932px) {
+      .gallery {
+        flex-direction: column;
+      }
+
+      .preview-images {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 0;
+
+      }
+
+      .preview-image video {
+        width: 160px;
+        height: auto;
+        margin-left: 10px;
+        margin-bottom: 20px;
+
+      }
+
+      .main-image video {
+        margin-top: 0;
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+      .gallery {
+        flex-direction: column;
+      }
+
+      .preview-images {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 0;
+      }
+
+      .preview-image video {
+        width: 140px;
+        height: 120px;
+        margin-left: 6px;
+      }
+
+      .main-image video {
+        margin-top: 0;
+      }
+
+      .main-image .description {
+        font-size: 14px;
+        text-align: justify;
+        text-overflow: clip;
+        margin-bottom: 20px;
+      }
+
+    }
+  </style>
+</head>
+
+<body onload="displayDefaultImage()">
+  <div class="gallery">
+    <div class="preview preview-left">
+      <div class="preview-images">
+        <div class="preview-image">
+
+          <video src="EXPORT/Grouting,Color change.mp4" width="200px" height="180px" margin="0 !important" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?
+          ipsum dolor sit amet ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque? consectetur adipisicing elit. Nisi, doloremque?"></video>
+          <h5 class="featureTitle">Grouting</h5>
+        </div>
+        <div class="preview-image">
+          <video src="EXPORT/Normal,Invert,Mirror.mp4" width="200px" height="180px" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?ipsum dolor sit ipsum dolor sit amet 
+          consectetur adipisicing elit. Nisi, doloremque? amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+          <h5 class="featureTitle">Normal Invert</h5>
+        </div>
+        <div class="preview-image">
+          <video src="EXPORT/PC.mp4" width="200px" height="180px" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque? ipsum dolor sit amet consectetur adipisicing elit.
+          Nisi, doloremque?ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+          <h5 class="featureTitle">PC</h5>
+        </div>
+      </div>
+    </div>
+    <div class="mainImgContainer">
+      <div class="main-image" id=mainImgCont>
+        <h1 style="display:none">Main Image</h1>
+        <video src="" id="mainVideo"></video>
+        <div class="description"></div>
+      </div>
+    </div>
+    <div class="preview preview-right">
+      <div class="preview-images">
+        <div class="preview-image">
+          <video src="EXPORT/Marblechange.mp4" width="200px" height="180px" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque? ipsum dolor sit amet consectetur adipisicing elit.
+          Nisi, doloremque?ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?" style="margin-top:0 !important;margin-bottom:0 !important"></video>
+          <h5 class="featureTitle">Marble Change</h5>
+        </div>
+        <div class="preview-image">
+          <video src="EXPORT/Rotation,Roughness,Offset.mp4" width="200px" height="180px" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque? ipsum dolor sit amet consectetur adipisicing elit.
+          Nisi, doloremque?ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+          <h5 class="featureTitle">Rotation</h5>
+        </div>
+        <div class="preview-image">
+          <video src="EXPORT/VR.mp4" width="200px" height="180px" autoplay loop data-description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque? ipsum dolor sit amet consectetur adipisicing elit.
+          Nisi, doloremque?ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?"></video>
+          <h5 class="featureTitle">VR</h5>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get the preview images and the main image
+    const defaultImageUrl = 'img/features-bg-2.jpg';
+    const previewImages = document.querySelectorAll('.preview-image');
+    const mainImage = document.querySelector('.main-image video');
+    const description = document.querySelector('.main-image .description');
+
+    function displayDefaultImage() {
+      const mainImageDisplay = document.getElementById('mainVideo');
+      mainImageDisplay.src = defaultImageUrl;
+      console.log("page Loaded");
+
+    }
+
+
+    // Loop through the preview images and add a click event listener to each one
+    previewImages.forEach(previewImage => {
+      previewImage.addEventListener('click', () => {
+        // Set the src of the main image to the src of the clicked preview image
+
+        mainImage.src = previewImage.querySelector('video').src;
+        mainImage.play();
+        // Set the description of the main image to the description of the clicked preview image
+        description.textContent = previewImage.querySelector('video').dataset.description;
+        // Show the main image and hide the preview images
+        document.querySelector('.main-image').style.display = 'block';
+        // document.querySelectorAll('.preview-image').forEach(previewImage => {
+        //   previewImage.style.display = 'none';
+        // });
+        if (window.innerWidth < 450) {
+          // Scroll to the video container using the scrollTo method
+          window.scrollTo(
+            0,
+            mainImage.offsetTop,
+
+          );
+        }
+
+      });
+    });
+
+    // Add a click event listener to the main image to hide it and show the preview images again
+    mainImage.addEventListener('click', () => {
+      document.querySelector('.main-image').style.display = 'none';
+      document.querySelectorAll('.preview-image').forEach(previewImage => {
+        previewImage.style.display = 'block';
+      });
+      displayDefaultImage();
+    });
+
+    //how can i make the page scroll upto the main video section when i click on the preview image?
+  </script>
+
+</body>
+
+</html>
